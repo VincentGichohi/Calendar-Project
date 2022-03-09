@@ -1,10 +1,9 @@
 const birthdayEl = document.querySelector('#birthday');
-const genderEl = document.querySelector('#gender');
-const passwordEl = document.querySelector('#password');
-const confirmPasswordEl = document.querySelector('#confirm-password');
-
-const form = document.querySelector('#submit');
-
+const result = document.querySelector('.form-field')
+// const submidocumentt = .getElementById('submit');
+const male = document.getElementById('flexRadioDefault1');//For the male radio button
+const female = document.getElementById('flexRadioDefault2');//For the female radio button
+const submit = document.getElementById('submit')//For the submit button
 
 const checkDateOfBirth = () => {
 
@@ -26,19 +25,6 @@ const checkDateOfBirth = () => {
     return valid;
 };
 
-const checkEmail = () => {
-    let valid = false;
-    const email = genderEl.value.trim();
-    if (!isRequired(email)) {
-        showError(genderEl, 'Email cannot be blank.');
-    } else if (!isEmailValid(email)) {
-        showError(genderEl, 'Email is not valid.')
-    } else {
-        showSuccess(genderEl);
-        valid = true;
-    }
-    return valid;
-};
 
 
 const isEmailValid = (email) => {
@@ -82,28 +68,17 @@ const showSuccess = (input) => {
 }
 
 
-form.addEventListener('submit', function (e) {
-    // prevent the form from submitting
-    e.preventDefault();
-
-    // validate fields
-    let isUsernameValid = checkUsername(),
-        isEmailValid = checkEmail(),
-        isPasswordValid = checkPassword(),
-        isConfirmPasswordValid = checkConfirmPassword();
-
-    let isFormValid = isUsernameValid &&
-        isEmailValid &&
-        isPasswordValid &&
-        isConfirmPasswordValid;
-
-    // submit to the server if the form is valid
-    if (isFormValid) {
-
+form.addEventListener('submit', (e) => {
+    let messages = []
+    if (dateOfBirth === 0 || dateOfBirth === NaN) {
+        messages.push('Date of birth cannot be empty')
     }
+
+    e.preventDefault();
 });
 
-
+//a functions that links with the submit button
+    
 const debounce = (fn, delay = 500) => {
     let timeoutId;
     return (...args) => {
@@ -118,19 +93,19 @@ const debounce = (fn, delay = 500) => {
     };
 };
 
-form.addEventListener('input', debounce(function (e) {
-    switch (e.target.id) {
-        case 'username':
-            checkUsername();
-            break;
-        case 'email':
-            checkEmail();
-            break;
-        case 'password':
-            checkPassword();
-            break;
-        case 'confirm-password':
-            checkConfirmPassword();
-            break;
-    }
-}));
+// form.addEventListener('input', debounce(function (e) {
+//     switch (e.target.id) {
+//         case 'username':
+//             checkUsername();
+//             break;
+//         case 'email':
+//             checkEmail();
+//             break;
+//         case 'password':
+//             checkPassword();
+//             break;
+//         case 'confirm-password':
+//             checkConfirmPassword();
+//             break;
+//     }
+// }));
